@@ -1,23 +1,24 @@
 import styled from "styled-components";
-import { Formik, Form, Field, FormikHelpers } from "formik";
+import { Formik, Form, FormikHelpers } from "formik";
 // import * as Yup from "yup";
-import { object, string, number } from "yup";
+import { object, string } from "yup";
+import { Campo } from "./Campo";
 
 const schemaValidacao = object().shape({
-  cpf: string().required(),
-  agencia: number().required(),
-  senha: string().required(),
+  cpf: string().required("Campo CPF esta vazio."),
+  agencia: string().required("Campo agencia esta vazio."),
+  senha: string().required("Campo senha esta vazio."),
 });
 
 interface FormLoginTypes {
   cpf: string;
-  agencia: number;
+  agencia: string;
   senha: string;
 }
 
 const valoresIniciaisFormLogin: FormLoginTypes = {
   cpf: "",
-  agencia: 0,
+  agencia: "",
   senha: ""
 };
 
@@ -32,32 +33,57 @@ export function Login() {
         initialValues={valoresIniciaisFormLogin}
         onSubmit={onSubmitForm}
         validationSchema={schemaValidacao}
-      ></Formik>
-      <h1>Login</h1>
-      <input
-        type="text"
-        placeholder="cpf"
-      />
-      <input
-        type="text"
-        placeholder="agencia"
-      />
-      <input
-        type="text"
-        placeholder="senha"
-      />
-      <button
-        type="button"
-      >Entrar</button>
-      <button
-        type="button"
-      >Limpar</button>
-      <button
-        type="button"
-      >Novo usuario</button>
+      >
+        {({ values }) => {
+          return (
+            <FormStyled>
+              <h1>Login</h1>
+              <Campo
+                values={values.cpf}
+                placeholder="Digite o CPF"
+                type="password"
+                name="cpf"
+                id="cpf"
+                label="CPF"
+              />
+              <Campo
+                values={values.agencia}
+                placeholder="Digite o agencia"
+                type="password"
+                name="agencia"
+                id="agencia"
+                label="Agencia"
+              />
+              <Campo
+                values={values.senha}
+                placeholder="Digite o senha"
+                type="password"
+                name="senha"
+                id="senha"
+                label="Senha"
+              />
+              <button
+                type="submit"
+              >Entrar</button>
+              <button
+                type="reset"
+              >Limpar</button>
+              <button
+                type="button"
+              >Novo usuario</button>
+            </FormStyled>
+          );
+        }}
+      </Formik>
     </Center>
   );
 }
+
+const FormStyled = styled(Form)`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
 
 const Center = styled.div`
   /* padding: 10px; */
@@ -65,5 +91,4 @@ const Center = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
 `;
