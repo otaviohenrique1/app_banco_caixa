@@ -4,11 +4,15 @@ import { Formik, Form, FormikHelpers } from "formik";
 import { object, string } from "yup";
 import { Campo } from "../components/Campo";
 import { Botao } from "../components/Botao";
+import { useNavigate } from "react-router-dom";
 
 const schemaValidacao = object().shape({
-  cpf: string().required("Campo CPF esta vazio."),
-  agencia: string().required("Campo agencia esta vazio."),
-  senha: string().required("Campo senha esta vazio."),
+  cpf: string()
+    .required("Campo CPF esta vazio."),
+  agencia: string()
+    .required("Campo agencia esta vazio."),
+  senha: string()
+    .required("Campo senha esta vazio."),
 });
 
 interface FormLoginTypes {
@@ -24,6 +28,8 @@ const valoresIniciaisFormLogin: FormLoginTypes = {
 };
 
 export function Login() {
+  const navigate = useNavigate();
+
   function onSubmitForm(values: FormLoginTypes, formikHelpers: FormikHelpers<FormLoginTypes>) {
     // 
   }
@@ -75,6 +81,7 @@ export function Login() {
                 <Botao
                   corBotaoType="verde"
                   type="button"
+                  onClick={() => navigate("/novo_usuario")}
                 >Novo usuario</Botao>
               </BotaoContainer>
             </FormStyled>

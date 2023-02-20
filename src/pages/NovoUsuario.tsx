@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { Formik, Form, FormikHelpers } from "formik";
-// import * as Yup from "yup";
 import { object, string } from "yup";
 import { Campo } from "../components/Campo";
 import { Botao } from "../components/Botao";
+import { useNavigate } from "react-router-dom";
 
 const schemaValidacao = object().shape({
   nome: string()
@@ -34,6 +34,8 @@ const valoresIniciaisFormNovoUsuario: FormNovoUsuarioTypes = {
 };
 
 export function NovoUsuario() {
+  const navigate = useNavigate();
+
   function onSubmitForm(values: FormNovoUsuarioTypes, formikHelpers: FormikHelpers<FormNovoUsuarioTypes>) {
     // 
   }
@@ -48,7 +50,7 @@ export function NovoUsuario() {
         {({ values }) => {
           return (
             <FormStyled>
-              <h1>Login</h1>
+              <h1>Novo Usuário</h1>
               <Campo
                 values={values.nome}
                 placeholder="Digite o nome"
@@ -93,6 +95,7 @@ export function NovoUsuario() {
                 <Botao
                   corBotaoType="verde"
                   type="button"
+                  onClick={() => navigate("/")}
                 >Voltar</Botao>
               </BotaoContainer>
             </FormStyled>
