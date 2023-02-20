@@ -1,5 +1,17 @@
 import { Dispatch, FC, SetStateAction, createContext, ReactNode, useState } from "react";
 
+export interface Banco {
+  id: string;
+  codigo: string;
+  nome: string;
+  cpf: string;
+  email: string;
+  senha: string;
+  telefone: string;
+  agencia: string;
+  saldo: string;
+}
+
 export interface ListaProdutosTypes {
   id: number;
   nome: string;
