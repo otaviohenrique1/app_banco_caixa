@@ -2,7 +2,8 @@ import styled from "styled-components";
 import { Formik, Form, FormikHelpers } from "formik";
 // import * as Yup from "yup";
 import { object, string } from "yup";
-import { Campo } from "./Campo";
+import { Campo } from "../components/Campo";
+import { Botao } from "../components/Botao";
 
 const schemaValidacao = object().shape({
   cpf: string().required("Campo CPF esta vazio."),
@@ -41,7 +42,7 @@ export function Login() {
               <Campo
                 values={values.cpf}
                 placeholder="Digite o CPF"
-                type="password"
+                type="text"
                 name="cpf"
                 id="cpf"
                 label="CPF"
@@ -49,7 +50,7 @@ export function Login() {
               <Campo
                 values={values.agencia}
                 placeholder="Digite o agencia"
-                type="password"
+                type="text"
                 name="agencia"
                 id="agencia"
                 label="Agencia"
@@ -62,15 +63,18 @@ export function Login() {
                 id="senha"
                 label="Senha"
               />
-              <button
+              <Botao
+                corBotaoType="azul"
                 type="submit"
-              >Entrar</button>
-              <button
+              >Entrar</Botao>
+              <Botao
+                corBotaoType="vermelho"
                 type="reset"
-              >Limpar</button>
-              <button
+              >Limpar</Botao>
+              <Botao
+                corBotaoType="verde"
                 type="button"
-              >Novo usuario</button>
+              >Novo usuario</Botao>
             </FormStyled>
           );
         }}

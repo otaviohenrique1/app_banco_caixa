@@ -18,7 +18,7 @@ export function Campo(props: CampoProps) {
       <label
         htmlFor={id}
       >{label}</label>
-      <Field
+      <FieldStyled
         type={type}
         placeholder={placeholder}
         value={values}
@@ -33,12 +33,18 @@ export function Campo(props: CampoProps) {
   );
 }
 
+const FieldStyled = styled(Field)`
+  padding: 10px 15px;
+  font-size: 15px;
+`;
+
 const CampoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 2px;
 
   span.error-message {
     color: red;
+    font-size: 15px;
   }
 `;
