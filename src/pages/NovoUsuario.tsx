@@ -6,32 +6,42 @@ import { Campo } from "../components/Campo";
 import { Botao } from "../components/Botao";
 
 const schemaValidacao = object().shape({
-  cpf: string().required("Campo CPF esta vazio."),
-  agencia: string().required("Campo agencia esta vazio."),
-  senha: string().required("Campo senha esta vazio."),
+  nome: string()
+    .required("Campo nome esta vazio."),
+  email: string()
+    .email("Email invalido")
+    .required("Campo email esta vazio."),
+  cpf: string()
+    .required("Campo CPF esta vazio."),
+  senha: string()
+    .min(8, "Minimo de 8 caracteres.")
+    .max(32, "Maximo de 32 caracteres.")
+    .required("Campo senha esta vazio."),
 });
 
-interface FormLoginTypes {
+interface FormNovoUsuarioTypes {
+  nome: string;
+  email: string;
   cpf: string;
-  agencia: string;
   senha: string;
 }
 
-const valoresIniciaisFormLogin: FormLoginTypes = {
+const valoresIniciaisFormNovoUsuario: FormNovoUsuarioTypes = {
+  nome: "",
+  email: "",
   cpf: "",
-  agencia: "",
   senha: ""
 };
 
-export function Login() {
-  function onSubmitForm(values: FormLoginTypes, formikHelpers: FormikHelpers<FormLoginTypes>) {
+export function NovoUsuario() {
+  function onSubmitForm(values: FormNovoUsuarioTypes, formikHelpers: FormikHelpers<FormNovoUsuarioTypes>) {
     // 
   }
 
   return (
     <Center>
       <Formik
-        initialValues={valoresIniciaisFormLogin}
+        initialValues={valoresIniciaisFormNovoUsuario}
         onSubmit={onSubmitForm}
         validationSchema={schemaValidacao}
       >
@@ -39,6 +49,14 @@ export function Login() {
           return (
             <FormStyled>
               <h1>Login</h1>
+              <Campo
+                values={values.nome}
+                placeholder="Digite o nome"
+                type="text"
+                name="nome"
+                id="nome"
+                label="Nome"
+              />
               <Campo
                 values={values.cpf}
                 placeholder="Digite o CPF"
@@ -48,12 +66,12 @@ export function Login() {
                 label="CPF"
               />
               <Campo
-                values={values.agencia}
-                placeholder="Digite o agencia"
-                type="text"
-                name="agencia"
-                id="agencia"
-                label="Agencia"
+                values={values.email}
+                placeholder="Digite o email"
+                type="email"
+                name="email"
+                id="email"
+                label="Email"
               />
               <Campo
                 values={values.senha}
@@ -67,7 +85,7 @@ export function Login() {
                 <Botao
                   corBotaoType="azul"
                   type="submit"
-                >Entrar</Botao>
+                >Salvar</Botao>
                 <Botao
                   corBotaoType="vermelho"
                   type="reset"
@@ -75,7 +93,7 @@ export function Login() {
                 <Botao
                   corBotaoType="verde"
                   type="button"
-                >Novo usuario</Botao>
+                >Voltar</Botao>
               </BotaoContainer>
             </FormStyled>
           );
