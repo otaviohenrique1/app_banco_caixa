@@ -4,6 +4,8 @@ import { object, string } from "yup";
 import { Campo } from "../components/Campo";
 import { Botao } from "../components/Botao";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { ClienteContext } from "../context/cliente";
 
 const schemaValidacao = object().shape({
   nome: string()
@@ -24,20 +26,35 @@ interface FormNovoUsuarioTypes {
   email: string;
   cpf: string;
   senha: string;
+  conta: string;
+  telefone: string;
 }
 
 const valoresIniciaisFormNovoUsuario: FormNovoUsuarioTypes = {
   nome: "",
   email: "",
   cpf: "",
-  senha: ""
+  senha: "",
+  conta: "",
+  telefone: "",
 };
 
 export function NovoUsuario() {
   const navigate = useNavigate();
+  const { adicionarCliente } = useContext(ClienteContext);
 
   function onSubmitForm(values: FormNovoUsuarioTypes, formikHelpers: FormikHelpers<FormNovoUsuarioTypes>) {
-    // 
+    adicionarCliente({
+      codigo: "11111",
+      conta: parseInt(values.conta),
+      nome: values.nome,
+      cpf: parseInt(values.cpf),
+      email: values.email,
+      senha: values.senha,
+      telefone: parseInt(values.telefone),
+      agencia: "1111",
+      saldo: 0,
+    });
   }
 
   return (

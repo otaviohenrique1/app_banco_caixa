@@ -34,13 +34,13 @@ export const ValoresIniciais: PropsClienteContext = {
   transferirSaldo: () => { },
 };
 
-export const CompraContext = createContext<PropsClienteContext>(ValoresIniciais);
+export const ClienteContext = createContext<PropsClienteContext>(ValoresIniciais);
 
-export interface CompraContextProviderProps {
+export interface ClienteContextProviderProps {
   children: ReactNode;
 }
 
-export const CompraContextProvider: FC<CompraContextProviderProps> = (props: CompraContextProviderProps) => {
+export const ClienteContextProvider: FC<ClienteContextProviderProps> = (props: ClienteContextProviderProps) => {
   const [state, setState] = useState(ValoresIniciais.state);
 
   function adicionarCliente(cliente: Cliente) {
@@ -109,7 +109,7 @@ export const CompraContextProvider: FC<CompraContextProviderProps> = (props: Com
   }
 
   return (
-    <CompraContext.Provider
+    <ClienteContext.Provider
       value={{
         state,
         setState,
@@ -121,6 +121,6 @@ export const CompraContextProvider: FC<CompraContextProviderProps> = (props: Com
       }}
     >
       {props.children}
-    </CompraContext.Provider>
+    </ClienteContext.Provider>
   );
 };
