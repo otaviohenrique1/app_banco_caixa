@@ -1,8 +1,11 @@
+import { GlobalContext } from './context';
 import { AppRoutes } from './pages/routes';
 
 function App() {
   return (
-    <AppRoutes />
+    <GlobalContext>
+      <AppRoutes />
+    </GlobalContext>
   );
 }
 

@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { CompraContextProvider } from "./compra";
+import { ClienteContextProvider } from "./cliente";
 
 export interface GlobalContextProps {
   children: ReactNode;
@@ -7,6 +7,6 @@ export interface GlobalContextProps {
 
 export function GlobalContext(props: GlobalContextProps) {
   return (
-    <CompraContextProvider>{props.children}</CompraContextProvider>
+    <ClienteContextProvider>{props.children}</ClienteContextProvider>
   );
 }
