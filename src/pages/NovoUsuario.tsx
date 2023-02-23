@@ -6,6 +6,7 @@ import { Botao } from "../components/Botao";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ClienteContext } from "../context/cliente";
+import { v4 } from "uuid";
 
 const schemaValidacao = object().shape({
   nome: string()
@@ -45,7 +46,7 @@ export function NovoUsuario() {
 
   function onSubmitForm(values: FormNovoUsuarioTypes, formikHelpers: FormikHelpers<FormNovoUsuarioTypes>) {
     adicionarCliente({
-      codigo: "11111",
+      codigo: v4(),
       conta: parseInt(values.conta),
       nome: values.nome,
       cpf: parseInt(values.cpf),
