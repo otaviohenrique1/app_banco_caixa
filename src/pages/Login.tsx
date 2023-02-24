@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Formik, Form, FormikHelpers } from "formik";
 // import * as Yup from "yup";
 import { object, string } from "yup";
-import { Campo } from "../components/Campo";
+import { CampoInput } from "../components/Campo";
 import { Botao } from "../components/Botao";
 import { useNavigate } from "react-router-dom";
 
@@ -45,7 +45,7 @@ export function Login() {
           return (
             <FormStyled>
               <h1>Login</h1>
-              <Campo
+              <CampoInput
                 values={values.cpf}
                 placeholder="Digite o CPF"
                 type="text"
@@ -53,7 +53,7 @@ export function Login() {
                 id="cpf"
                 label="CPF"
               />
-              <Campo
+              <CampoInput
                 values={values.agencia}
                 placeholder="Digite o agencia"
                 type="text"
@@ -61,7 +61,7 @@ export function Login() {
                 id="agencia"
                 label="Agencia"
               />
-              <Campo
+              <CampoInput
                 values={values.senha}
                 placeholder="Digite o senha"
                 type="password"

@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import { Formik, Form, FormikHelpers } from "formik";
 import { object, string } from "yup";
-import { Campo } from "../components/Campo";
+import { CampoInput, CampoSelect } from "../components/Campo";
 import { Botao } from "../components/Botao";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ClienteContext } from "../context/cliente";
 import { v4 } from "uuid";
+import { agenciaLista } from "../utils/listas";
 
 const schemaValidacao = object().shape({
   nome: string()
@@ -29,6 +30,7 @@ interface FormNovoUsuarioTypes {
   senha: string;
   conta: string;
   telefone: string;
+  agencia: string;
 }
 
 const valoresIniciaisFormNovoUsuario: FormNovoUsuarioTypes = {
@@ -38,6 +40,7 @@ const valoresIniciaisFormNovoUsuario: FormNovoUsuarioTypes = {
   senha: "",
   conta: "",
   telefone: "",
+  agencia: "",
 };
 
 export function NovoUsuario() {
@@ -69,7 +72,7 @@ export function NovoUsuario() {
           return (
             <FormStyled>
               <h1>Novo Usuário</h1>
-              <Campo
+              <CampoInput
                 values={values.nome}
                 placeholder="Digite o nome"
                 type="text"
@@ -77,7 +80,7 @@ export function NovoUsuario() {
                 id="nome"
                 label="Nome"
               />
-              <Campo
+              <CampoInput
                 values={values.cpf}
                 placeholder="Digite o CPF"
                 type="text"
@@ -85,7 +88,7 @@ export function NovoUsuario() {
                 id="cpf"
                 label="CPF"
               />
-              <Campo
+              <CampoInput
                 values={values.email}
                 placeholder="Digite o email"
                 type="email"
@@ -93,13 +96,20 @@ export function NovoUsuario() {
                 id="email"
                 label="Email"
               />
-              <Campo
+              <CampoInput
                 values={values.senha}
                 placeholder="Digite o senha"
                 type="password"
                 name="senha"
                 id="senha"
                 label="Senha"
+              />
+              <CampoSelect
+                id="agencia"
+                label="Agencia"
+                name="agencia"
+                values={values.agencia}
+                data={agenciaLista}
               />
               <BotaoContainer>
                 <Botao

@@ -4,14 +4,17 @@ import styled from "styled-components";
 
 interface CampoProps {
   values: string;
-  placeholder: string;
-  type: 'date' | 'email' | 'number' | 'password' | 'tel' | 'text' | 'time' | 'url';
   name: string;
   id: string;
   label: ReactNode;
 }
 
-export function Campo(props: CampoProps) {
+interface CampoInputProps extends CampoProps {
+  placeholder: string;
+  type: 'date' | 'email' | 'number' | 'password' | 'tel' | 'text' | 'time' | 'url';
+}
+
+export function CampoInput(props: CampoInputProps) {
   const { values, placeholder, type, name, id, label } = props;
   return (
     <CampoContainer>
@@ -24,6 +27,49 @@ export function Campo(props: CampoProps) {
         value={values}
         name={name}
         id={id} />
+      <ErrorMessage
+        name={name}
+        component="span"
+        className="error-message"
+      />
+    </CampoContainer>
+  );
+}
+
+interface DataListaTypes {
+  label: string;
+  valor: string;
+}
+
+interface CampoSelectProps extends CampoProps {
+  data: DataListaTypes[];
+}
+
+export function CampoSelect(props: CampoSelectProps) {
+  const { values, name, id, label, data } = props;
+
+  return (
+    <CampoContainer>
+      <label
+        htmlFor={id}
+      >{label}</label>
+      <FieldStyled
+        name={name}
+        id={id}
+        component="select"
+        value={values}
+      >
+        <option>Selecione</option>
+        {data.map((item, index) => {
+          const { label, valor } = item;
+          return (
+            <option
+              value={valor}
+              key={index}
+            >{label}</option>
+          );
+        })}
+      </FieldStyled>
       <ErrorMessage
         name={name}
         component="span"
